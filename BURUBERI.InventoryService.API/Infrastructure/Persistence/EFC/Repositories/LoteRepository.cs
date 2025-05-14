@@ -26,4 +26,24 @@ public class LoteRepository : ILoteRepository
         await _context.SaveChangesAsync();
         return lote;
     }
+    
+    public async Task<Lot> UpdateAsync(Lot lote)
+    {
+        _context.Lots.Update(lote);
+        await _context.SaveChangesAsync();
+        return lote;
+    }
+
+    public async Task DeleteAsync(Guid id)
+    {
+        var lote = await _context.Lots.FindAsync(id);
+        if (lote == null) return;
+        _context.Lots.Remove(lote);
+        await _context.SaveChangesAsync();
+    }
+    public async Task<Lot?> GetByIdAsync(Guid id)
+    {
+        return await _context.Lots.AsNoTracking().FirstOrDefaultAsync(l => l.Id == id);
+    }
+    
 }

@@ -1,5 +1,6 @@
 ﻿using BURUBERI.InventoryService.API.Domain.Model.Aggregates;
 using BURUBERI.InventoryService.API.Domain.Model.Commands;
+using BURUBERI.InventoryService.API.Interface.REST.Resources;
 
 namespace BURUBERI.InventoryService.API.Domain.Services;
 
@@ -14,4 +15,5 @@ public interface ILoteCommandService
     /// <param name="command">The command containing lot creation details.</param>
     /// <returns>The created Lot aggregate.</returns>
     Task<Lot> CreateLoteAsync(CreateLoteCommand command);
-}
+    Task<Lot> UpdateLoteAsync(Guid id, UpdateLoteResource resource);
+    Task DeleteLoteAsync(Guid id);}
