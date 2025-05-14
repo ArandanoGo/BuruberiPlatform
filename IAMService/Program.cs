@@ -117,10 +117,14 @@ app.MapControllers();
 // ============ REGISTRO EN RegistryService ============
 try
 {
+    // Detectar el puerto real desde launchSettings.json o variable de entorno
+    var appUrls = builder.Configuration["ASPNETCORE_URLS"] ?? "http://localhost:5161";
+    var port = new Uri(appUrls).Port;
+
     var serviceInfo = new
     {
         name = "iam-service",
-        url = "http://localhost:5085"
+        url = $"http://localhost:{port}"
     };
 
     var json = JsonSerializer.Serialize(serviceInfo);
@@ -133,8 +137,7 @@ try
 }
 catch (Exception ex)
 {
-    Console.WriteLine($"❌ Error registrando el servicio: {ex.Message}");
+    Console.WriteLine($"❌ Error registrando IAMService: {ex.Message}");
 }
-// =====================================================
 
 app.Run();

@@ -6,6 +6,8 @@ using BURUBERI.InventoryService.API.Domain.Repositories;
 using BURUBERI.InventoryService.API.Domain.Services;
 using BURUBERI.InventoryService.API.Infrastructure.Persistence.EFC.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// ✅ Configura EF Core con MySQL (ajusta la cadena en appsettings.json)
+// ✅ Configura EF Core con MySQL
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -22,7 +24,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     )
 );
 
-// ✅ Registra repositorio e infra
+// ✅ Registra repositorio e infraestructura
 builder.Services.AddScoped<ILoteRepository, LoteRepository>();
 
 // ✅ Registra servicios de aplicación
@@ -49,6 +51,32 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     context.Database.EnsureCreated();
+}
+
+// ✅ Registro automático en RegistryService
+try
+{
+    // Detectar puerto desde la configuración actual (ej. launchSettings.json)
+    var appUrls = builder.Configuration["ASPNETCORE_URLS"] ?? "http://localhost:5000";
+    var port = new Uri(appUrls).Port;
+
+    var serviceInfo = new
+    {
+        name = "inventory-service",
+        url = $"http://localhost:{port}"
+    };
+
+    var json = JsonSerializer.Serialize(serviceInfo);
+    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+    using var client = new HttpClient();
+    var response = await client.PostAsync("http://localhost:5002/registry/register", content);
+
+    Console.WriteLine($"✅ Registro en RegistryService: {response.StatusCode}");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"❌ Error registrando InventoryService: {ex.Message}");
 }
 
 app.Run();
