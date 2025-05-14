@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tavo1\\Documents\\EventWinePlatform\\AdminService.API\\AdminService.API.csproj": {}
+    "C:\\Users\\tavo1\\Documents\\BuruberiPlatformme\\AdminService.API\\AdminService.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tavo1\\Documents\\EventWinePlatform\\AdminService.API\\AdminService.API.csproj": {
+    "C:\\Users\\tavo1\\Documents\\BuruberiPlatformme\\AdminService.API\\AdminService.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tavo1\\Documents\\EventWinePlatform\\AdminService.API\\AdminService.API.csproj",
+        "projectUniqueName": "C:\\Users\\tavo1\\Documents\\BuruberiPlatformme\\AdminService.API\\AdminService.API.csproj",
         "projectName": "AdminService.API",
-        "projectPath": "C:\\Users\\tavo1\\Documents\\EventWinePlatform\\AdminService.API\\AdminService.API.csproj",
+        "projectPath": "C:\\Users\\tavo1\\Documents\\BuruberiPlatformme\\AdminService.API\\AdminService.API.csproj",
         "packagesPath": "C:\\Users\\tavo1\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tavo1\\Documents\\EventWinePlatform\\AdminService.API\\obj\\",
+        "outputPath": "C:\\Users\\tavo1\\Documents\\BuruberiPlatformme\\AdminService.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
