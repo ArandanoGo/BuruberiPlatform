@@ -24,10 +24,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // ✅ Registra repositorio e infra
 builder.Services.AddScoped<ILoteRepository, LoteRepository>();
+builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
 
 // ✅ Registra servicios de aplicación
 builder.Services.AddScoped<ILoteCommandService, LoteCommandService>();
 builder.Services.AddScoped<ILoteQueryService, LoteQueryService>();
+builder.Services.AddScoped<IReservaCommandService, ReservaCommandService>();
+builder.Services.AddScoped<IReservaQueryService, ReservaQueryService>();
 
 // ✅ Agrega el servicio en segundo plano (Worker)
 builder.Services.AddHostedService<Worker>();

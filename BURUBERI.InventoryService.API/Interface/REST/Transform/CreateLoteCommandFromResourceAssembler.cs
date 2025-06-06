@@ -1,5 +1,4 @@
-﻿using System;
-using BURUBERI.InventoryService.API.Domain.Model.Commands;
+﻿using BURUBERI.InventoryService.API.Domain.Model.Commands;
 using BURUBERI.InventoryService.API.Interface.REST.Resources;
 
 namespace BURUBERI.InventoryService.API.Interface.REST.Transform

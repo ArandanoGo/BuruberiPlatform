@@ -12,6 +12,9 @@ namespace BURUBERI.InventoryService.API.Domain.Model.Aggregates
         // DbSet para el agregado Lote
         public DbSet<Lote> Lots { get; set; }
 
+        // DbSet para el agregado Reserva
+        public DbSet<Reserva> Reservas { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -78,6 +81,39 @@ namespace BURUBERI.InventoryService.API.Domain.Model.Aggregates
                       .IsRequired();
                 entity.Property(e => e.FechaActualizacion)
                       .IsRequired();
+            });
+
+            // Configurar la entidad Reserva
+            modelBuilder.Entity<Reserva>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.IdDistribuidor)
+                      .HasMaxLength(50)
+                      .IsRequired();
+
+                entity.Property(e => e.IdLote)
+                      .IsRequired();
+
+                entity.Property(e => e.IdProductor)
+                      .HasMaxLength(50)
+                      .IsRequired();
+
+                entity.Property(e => e.FechaRegistro)
+                      .IsRequired();
+
+                entity.Property(e => e.Stock)
+                      .IsRequired();
+
+                entity.Property(e => e.Estado)
+                      .HasMaxLength(20)
+                      .IsRequired();
+
+                // Configurar relaciones si las tienes (opcional)
+                // entity.HasOne<Lote>()
+                //       .WithMany()
+                //       .HasForeignKey(e => e.IdLote)
+                //       .OnDelete(DeleteBehavior.Restrict);
             });
         }
     }
