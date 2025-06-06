@@ -14,6 +14,6 @@ public interface ILoteCommandService
     /// </summary>
     /// <param name="command">The command containing lot creation details.</param>
     /// <returns>The created Lot aggregate.</returns>
-    Task<Lot> CreateLoteAsync(CreateLoteCommand command);
-    Task<Lot> UpdateLoteAsync(Guid id, UpdateLoteResource resource);
+    Task<Lote> CreateLoteAsync(CreateLoteCommand command);
+    Task<Lote> UpdateLoteAsync(Guid id, UpdateLoteResource resource);
     Task DeleteLoteAsync(Guid id);}

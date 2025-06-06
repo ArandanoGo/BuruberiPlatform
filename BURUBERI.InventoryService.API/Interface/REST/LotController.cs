@@ -29,7 +29,7 @@ namespace BURUBERI.InventoryService.API.Interface.REST;
             var lote = await _commandService.CreateLoteAsync(command);
             var response = LoteResourceFromEntityAssembler.ToResource(lote);
 
-            return CreatedAtAction(nameof(GetByProducer), new { producerId = response.ProducerId }, response);
+            return CreatedAtAction(nameof(GetByProducer), new { producerId = response.IdProductor }, response);
         }
 
         // GET /api/lotes

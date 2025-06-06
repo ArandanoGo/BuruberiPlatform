@@ -14,13 +14,13 @@ public class LoteQueryService : ILoteQueryService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<Lot>> GetAllLotesAsync(GetAllLoteQuery query)
+    public async Task<IEnumerable<Lote>> GetAllLotesAsync(GetAllLoteQuery query)
     {
         return await _repository.GetAllAsync();
     }
 
-    public async Task<IEnumerable<Lot>> GetLotesByProducerAsync(GetAllLoteByProducerIdQuery query)
+    public async Task<IEnumerable<Lote>> GetLotesByProducerAsync(GetAllLoteByProducerIdQuery query)
     {
-        return await _repository.GetByProducerAsync(query.ProducerId);
+        return await _repository.GetByProducerAsync(query.IdProductor);
     }
 }

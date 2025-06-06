@@ -11,10 +11,10 @@ public interface ILoteQueryService
     /// <summary>
     /// Retrieves all Lot aggregates.
     /// </summary>
-    Task<IEnumerable<Lot>> GetAllLotesAsync(GetAllLoteQuery query);
+    Task<IEnumerable<Lote>> GetAllLotesAsync(GetAllLoteQuery query);
 
     /// <summary>
     /// Retrieves Lot aggregates for a specific producer.
     /// </summary>
-    Task<IEnumerable<Lot>> GetLotesByProducerAsync(GetAllLoteByProducerIdQuery query);
+    Task<IEnumerable<Lote>> GetLotesByProducerAsync(GetAllLoteByProducerIdQuery query);
 }
