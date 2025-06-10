@@ -5,7 +5,6 @@ using BURUBERI.InventoryService.API.Interface.REST.Transform;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BURUBERI.InventoryService.API.Interface.REST;
-
 [ApiController]
     [Route("api/lotes")]
     public class LotController : ControllerBase
@@ -30,7 +29,7 @@ namespace BURUBERI.InventoryService.API.Interface.REST;
             var lote = await _commandService.CreateLoteAsync(command);
             var response = LoteResourceFromEntityAssembler.ToResource(lote);
 
-            return CreatedAtAction(nameof(GetByProducer), new { producerId = response.ProducerId }, response);
+            return CreatedAtAction(nameof(GetByProducer), new { producerId = response.IdProductor }, response);
         }
 
         // GET /api/lotes
@@ -39,11 +38,7 @@ namespace BURUBERI.InventoryService.API.Interface.REST;
         {
             var query = new GetAllLoteQuery();
             var lots = await _queryService.GetAllLotesAsync(query);
-            var resources = new List<LoteResource>();
-            foreach (var lot in lots)
-            {
-                resources.Add(LoteResourceFromEntityAssembler.ToResource(lot));
-            }
+            var resources = lots.Select(LoteResourceFromEntityAssembler.ToResource);
             return Ok(resources);
         }
 
@@ -53,11 +48,34 @@ namespace BURUBERI.InventoryService.API.Interface.REST;
         {
             var query = new GetAllLoteByProducerIdQuery(producerId);
             var lots = await _queryService.GetLotesByProducerAsync(query);
-            var resources = new List<LoteResource>();
-            foreach (var lot in lots)
-            {
-                resources.Add(LoteResourceFromEntityAssembler.ToResource(lot));
-            }
+            var resources = lots.Select(LoteResourceFromEntityAssembler.ToResource);
             return Ok(resources);
+        }
+
+        // PUT /api/lotes/{id}
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateLoteResource resource)
+        {
+            if (resource == null)
+                return BadRequest("Resource cannot be null.");
+
+            try
+            {
+                var updated = await _commandService.UpdateLoteAsync(id, resource);
+                var response = LoteResourceFromEntityAssembler.ToResource(updated);
+                return Ok(response);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        // DELETE /api/lotes/{id}
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _commandService.DeleteLoteAsync(id);
+            return NoContent();
         }
     }

@@ -4,7 +4,10 @@ namespace BURUBERI.InventoryService.API.Domain.Repositories;
 
 public interface ILoteRepository
 {
-    Task<IEnumerable<Lot>> GetAllAsync();
-    Task<IEnumerable<Lot>> GetByProducerAsync(string producerId);
-    Task<Lot> AddAsync(Lot lote);
+    Task<IEnumerable<Lote>> GetAllAsync();
+    Task<IEnumerable<Lote>> GetByProducerAsync(string idProductor);
+    Task<Lote> AddAsync(Lote lote);
+    Task<Lote> UpdateAsync(Lote lote);
+    Task DeleteAsync(Guid id);
+    Task<Lote?> GetByIdAsync(Guid id);
 }

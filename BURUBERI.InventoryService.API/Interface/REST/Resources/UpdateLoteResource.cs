@@ -1,11 +1,11 @@
 ﻿namespace BURUBERI.InventoryService.API.Interface.REST.Resources
 {
     /// <summary>
-    /// Recurso para crear un nuevo Lote vía API.
+    /// Recurso para actualizar un Lote existente vía API.
     /// </summary>
-    public class CreateLoteResource
+    public class UpdateLoteResource
     {
-        // Datos de registro
+        // Datos de registro (si fuera necesario actualizar)
         public string Autor { get; set; }
         public string Hora { get; set; }
 

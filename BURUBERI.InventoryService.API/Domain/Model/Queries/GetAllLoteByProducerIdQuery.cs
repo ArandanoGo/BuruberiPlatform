@@ -2,10 +2,10 @@
 
 public class GetAllLoteByProducerIdQuery
 {
-    public string ProducerId { get; }
+    public string IdProductor { get; }
 
-    public GetAllLoteByProducerIdQuery(string producerId)
+    public GetAllLoteByProducerIdQuery(string idProductor)
     {
-        ProducerId = producerId;
+        IdProductor = idProductor;
     }
 }
