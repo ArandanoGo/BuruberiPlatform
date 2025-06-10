@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAMService.Tests", "IAMServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewService", "ReviewService\ReviewService.csproj", "{6FACD19D-3484-4E50-96C3-412DB7076183}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BURUBERI.FavoritesService.API", "BURUBERI.FavoritesService.API\BURUBERI.FavoritesService.API.csproj", "{F55992E1-6E5F-4CBF-8E7D-CBCD9F51B10C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
