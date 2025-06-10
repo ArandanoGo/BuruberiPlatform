@@ -5807,24 +5807,31 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Jessica Elizabeth\\.nuget\\packages\\": {}
+    "C:\\Users\\tavo1\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jessica Elizabeth\\Documents\\GitHub\\arqui\\BuruberiPlatform\\BURUBERI.FavoritesService.API\\BURUBERI.FavoritesService.API.csproj",
+      "projectUniqueName": "C:\\Users\\tavo1\\Documents\\BuruberiPlatformuwua\\BURUBERI.FavoritesService.API\\BURUBERI.FavoritesService.API.csproj",
       "projectName": "BURUBERI.FavoritesService.API",
-      "projectPath": "C:\\Users\\Jessica Elizabeth\\Documents\\GitHub\\arqui\\BuruberiPlatform\\BURUBERI.FavoritesService.API\\BURUBERI.FavoritesService.API.csproj",
-      "packagesPath": "C:\\Users\\Jessica Elizabeth\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jessica Elizabeth\\Documents\\GitHub\\arqui\\BuruberiPlatform\\BURUBERI.FavoritesService.API\\obj\\",
+      "projectPath": "C:\\Users\\tavo1\\Documents\\BuruberiPlatformuwua\\BURUBERI.FavoritesService.API\\BURUBERI.FavoritesService.API.csproj",
+      "packagesPath": "C:\\Users\\tavo1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tavo1\\Documents\\BuruberiPlatformuwua\\BURUBERI.FavoritesService.API\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Jessica Elizabeth\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\tavo1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5842,7 +5849,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -5889,7 +5897,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\Jessica Elizabeth\\.dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
