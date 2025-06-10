@@ -1,4 +1,4 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAMService", "IAMService\IAMService.csproj", "{6F6DB470-0B9E-4D1F-AB42-4A206D4B1972}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayService", "GatewayService\GatewayService.csproj", "{892FA496-9448-4A26-B515-FA26CABE37FB}"
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BURUBERI.InventoryService.API", "BURUBERI.InventoryService.API\BURUBERI.InventoryService.API.csproj", "{E1BFF0B9-8DAB-4799-B660-B0BC116C4479}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IAMService.Tests", "IAMService.Tests\IAMService.Tests.csproj", "{FB910C04-8D82-4C28-BF93-379834B62D81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewService", "ReviewService\ReviewService.csproj", "{6FACD19D-3484-4E50-96C3-412DB7076183}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
