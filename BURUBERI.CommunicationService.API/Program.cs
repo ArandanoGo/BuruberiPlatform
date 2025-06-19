@@ -24,11 +24,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Repositorio
 builder.Services.AddScoped<IMensajeRepository, MensajeRepository>();
+builder.Services.AddScoped<IContactoRepository, ContactoRepository>();
 
 // Servicios de aplicación
 builder.Services.AddScoped<IMensajeCommandService, MensajeCommandService>();
 builder.Services.AddScoped<IMensajeQueryService, MensajeQueryService>();
 
+builder.Services.AddScoped<IContactoCommandService, ContactoCommandService>();
+builder.Services.AddScoped<IContactoQueryService, ContactoQueryService>();
 
 // ✅ Agrega el servicio en segundo plano (Worker)
 builder.Services.AddHostedService<Worker>();

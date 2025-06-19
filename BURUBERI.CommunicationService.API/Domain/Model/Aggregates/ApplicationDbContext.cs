@@ -12,6 +12,10 @@ namespace BURUBERI.CommunicationService.API.Domain.Model.Aggregates
         // DbSet para el agregado Lote
         
         public DbSet<Mensaje> Mensajes { get; set; }
+       
+        public DbSet<Contacto> Contactos { get; set; }
+
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
