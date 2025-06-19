@@ -26,9 +26,7 @@ namespace BURUBERI.CommunicationService.API.Application.Internal.CommandServices
                 DestinatarioId = command.DestinatarioId,
                 DestinatarioNombre = command.DestinatarioNombre,
                 Contenido = command.Contenido,
-                FechaEnvio = command.FechaEnvio,
-                FechaCreacion = DateTime.UtcNow,
-                FechaActualizacion = DateTime.UtcNow
+                FechaEnvio = command.FechaEnvio
             };
 
             return await _repository.AddAsync(mensaje);

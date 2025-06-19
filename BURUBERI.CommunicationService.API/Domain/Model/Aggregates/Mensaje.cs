@@ -11,10 +11,7 @@ namespace BURUBERI.CommunicationService.API.Domain.Model.Aggregates
         public string DestinatarioNombre { get; set; }  // Nombre del usuario que recibe
         public string Contenido { get; set; }           // Contenido del mensaje
         public DateTime FechaEnvio { get; set; }        // Fecha en la que se envió el mensaje
-
-        public DateTime FechaCreacion { get; set; } = DateTime.UtcNow;       // Fecha de creación
-        public DateTime FechaActualizacion { get; set; } = DateTime.UtcNow;  // Fecha de última actualización
-
+        
         // Constructor vacío
         public Mensaje()
         {

@@ -18,11 +18,10 @@ namespace BURUBERI.CommunicationService.API.Interface.REST.Transform
                 Id = entity.Id,
                 RemitenteId = entity.RemitenteId,
                 DestinatarioId = entity.DestinatarioId,
+                RemitenteNombre = entity.RemitenteNombre,
+                DestinatarioNombre = entity.DestinatarioNombre,
                 Contenido = entity.Contenido,
-                FechaEnvio = entity.FechaEnvio,
-
-                FechaCreacion = entity.FechaCreacion,
-                FechaActualizacion = entity.FechaActualizacion
+                FechaEnvio = entity.FechaEnvio
             };
         }
     }
