@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BURUBERI.FavoritesService.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+97a258361a1ef9824f8ea8c66a700cff1bfd6a13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6dc59a7d6da40abe45fc414c9161e845821c5bdd")]
 [assembly: System.Reflection.AssemblyProductAttribute("BURUBERI.FavoritesService.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BURUBERI.FavoritesService.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

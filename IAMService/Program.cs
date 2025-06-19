@@ -1,3 +1,6 @@
+using System.Text;
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using IAMService.IAM.Application.Internal.CommandServices;
 using IAMService.IAM.Application.Internal.OutboundServices;
 using IAMService.IAM.Application.Internal.QueryServices;
@@ -17,13 +20,10 @@ using IAMService.Shared.Infrastructure.Interfaces.ASP.Configuration;
 using IAMService.Shared.Infrastructure.Persistence.EFC.Configuration;
 using IAMService.Shared.Infrastructure.Persistence.EFC.Repositories;
 using IAMService.Shared.Infrastructure.Pipeline.Middleware.Components;
-using Microsoft.EntityFrameworkCore;
-using System.Text;
-using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configura el servicio CORS
+// ======================= CORS ========================
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -34,17 +34,14 @@ builder.Services.AddCors(options =>
     });
 });
 
-// =================================== Servicios Web API ===================================
+// =================== Web API Controllers ====================
 builder.Services.AddControllers();
 builder.Services.AddControllers(options => options.Conventions.Add(new KebabCaseRouteNamingConvention()));
-// ==========================================================================================
 
+// =================== DB Connection ====================
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
 if (connectionString == null)
-{
     throw new InvalidOperationException("Connection string not found.");
-}
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -55,19 +52,20 @@ builder.Services.AddDbContext<AppDbContext>(options =>
                .EnableSensitiveDataLogging()
                .EnableDetailedErrors();
     }
-    else if (builder.Environment.IsProduction())
+    else
     {
         options.UseMySQL(connectionString)
                .LogTo(Console.WriteLine, LogLevel.Error);
     }
 });
 
-// ============================= Swagger / OpenAPI =============================
+// =================== Swagger ====================
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options => options.EnableAnnotations());
-// ============================================================================
 
-// ================================== Inyecciones =============================
+
+
+// =================== Dependency Injection ====================
 builder.Services.AddScoped<IUnitOfWOrk, UnitOfWork>();
 
 // -------- Profiles
@@ -75,49 +73,38 @@ builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 builder.Services.AddScoped<IProfileCommandService, ProfileCommandService>();
 builder.Services.AddScoped<IProfileQueryService, ProfileQueryService>();
 
-// -------- IAM
+// TokenSettings Configuration
+
 builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection("TokenSettings"));
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserCommandService, UserCommandService>();
 builder.Services.AddScoped<IUserQueryService, UserQueryService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IHashingService, HashingService>();
 
-// -------- Shared
+// Common Exception Handling Middleware
+builder.Services.AddExceptionHandler<CommonExceptionHandler>();
 builder.Services.AddExceptionHandler<CommonExceptionHandler>();
 builder.Services.AddProblemDetails();
-// ============================================================================
 
 var app = builder.Build();
 
-// Aplica la política CORS globalmente
+// ========== Middleware ==========
 app.UseCors("AllowAll");
 
-// =================== Verifica y crea la base de datos si no existe ===================
+
+
+// ====== Ensure database exists ======
 using (var scope = app.Services.CreateScope())
 {
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<AppDbContext>();
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     context.Database.EnsureCreated();
 }
-// =====================================================================================
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-app.UseRouting();
-app.UseAuthorization();
-
-app.MapControllers();
-
-// ============ REGISTRO EN RegistryService ============
+// ====== RegistryService Registration ======
 try
 {
-    // Detectar el puerto real desde launchSettings.json o variable de entorno
     var appUrls = builder.Configuration["ASPNETCORE_URLS"] ?? "http://localhost:5161";
     var port = new Uri(appUrls).Port;
 
@@ -139,5 +126,19 @@ catch (Exception ex)
 {
     Console.WriteLine($"❌ Error registrando IAMService: {ex.Message}");
 }
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseRouting();
+app.UseAuthorization();
+
+app.MapControllers();
+
 
 app.Run();

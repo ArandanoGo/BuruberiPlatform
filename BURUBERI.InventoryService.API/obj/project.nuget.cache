@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "q0fXg81A1CU=",
+  "dgSpecHash": "RGqw4rxLw18=",
   "success": true,
-  "projectFilePath": "C:\\Users\\tavo1\\Documents\\BuruberiPlatformuwua\\BURUBERI.InventoryService.API\\BURUBERI.InventoryService.API.csproj",
+  "projectFilePath": "C:\\Users\\tavo1\\Music\\BuruberiPlatform\\BURUBERI.InventoryService.API\\BURUBERI.InventoryService.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tavo1\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\tavo1\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0\\microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",

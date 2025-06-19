@@ -8,6 +8,6 @@ builder.Services.AddReverseProxy()
 
 var app = builder.Build();
 
-app.MapReverseProxy(); // ← enruta todas las peticiones según config
+app.MapReverseProxy(); 
 
 app.Run();

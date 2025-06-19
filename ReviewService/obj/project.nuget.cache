@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kHMulL5Vzto=",
+  "dgSpecHash": "ldF08+ELPrk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\tavo1\\Documents\\BuruberiPlatformuwua\\ReviewService\\ReviewService.csproj",
+  "projectFilePath": "C:\\Users\\tavo1\\Music\\BuruberiPlatform\\ReviewService\\ReviewService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tavo1\\.nuget\\packages\\bouncycastle.cryptography\\2.5.1\\bouncycastle.cryptography.2.5.1.nupkg.sha512",
     "C:\\Users\\tavo1\\.nuget\\packages\\entityframeworkcore.createdupdateddate\\8.0.0\\entityframeworkcore.createdupdateddate.8.0.0.nupkg.sha512",

@@ -30,7 +30,7 @@ public class AuthenticationController(IUserCommandService userCommandService) : 
     /// <returns>
     /// The <see cref="AuthenticatedUserResource"/> resource.
     /// </returns>
-    [Infrastructure.Pipeline.Middleware.Attributes.AllowAnonymous]
+    [AllowAnonymous]
     [HttpPost("sign-in")]
     [SwaggerOperation(
         Summary = "Signs in the user.",
@@ -56,7 +56,7 @@ public class AuthenticationController(IUserCommandService userCommandService) : 
     /// <returns>
     /// A message indicating that the user was signed up.
     /// </returns>
-    [Infrastructure.Pipeline.Middleware.Attributes.AllowAnonymous]
+    [AllowAnonymous]
     [HttpPost("sign-up")]
     [SwaggerOperation(
         Summary = "Signs up the user.",
