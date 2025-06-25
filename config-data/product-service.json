@@ -1,5 +1,0 @@
-﻿{
-  "AppName": "Product Service",
-  "Port": 5001,
-  "ConnectionString": "Server=localhost;Database=ProductsDb;"
-}

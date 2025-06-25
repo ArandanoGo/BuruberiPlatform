@@ -5,4 +5,8 @@ namespace ReviewService.ReviewService.Domain.Repositories;
 
 public interface IReviewRepository : IBaseRepository<Review>
 {
+    Task<IEnumerable<Review>> ListByLoteIdAsync(Guid loteId);
+
+
+
 }

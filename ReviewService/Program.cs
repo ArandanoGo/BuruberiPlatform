@@ -1,4 +1,7 @@
+using System.Text;
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
+using ReviewService.Messaging;
 using ReviewService.ReviewService.Application.Internal.CommandServices;
 using ReviewService.ReviewService.Application.Internal.QueryServices;
 using ReviewService.ReviewService.Domain.Repositories;
@@ -58,6 +61,7 @@ var builder = WebApplication.CreateBuilder(args);
   builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
   builder.Services.AddScoped<IReviewCommandService, ReviewCommandService>();
   builder.Services.AddScoped<IReviewQueryService, ReviewQueryService>();
+  builder.Services.AddHostedService<ReviewRequestConsumer>();
 
 var app = builder.Build();
 
@@ -67,6 +71,28 @@ using (var scope = app.Services.CreateScope())
    var services = scope.ServiceProvider;
    var context = services.GetRequiredService<AppDbContext>();
    context.Database.EnsureCreated();
+}
+
+// ====== RegistryService Registration ======
+try
+{
+ var serviceInfo = new
+ {
+  name = "review-service",
+  url = "http://review-service:8080"
+ };
+
+ var json = JsonSerializer.Serialize(serviceInfo);
+ var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+ using var client = new HttpClient();
+ var response = await client.PostAsync("http://registry-service:8080/registry/register", content);
+
+ Console.WriteLine($"✅ Registro en RegistryService: {response.StatusCode}");
+}
+catch (Exception ex)
+{
+ Console.WriteLine($"❌ Error registrando ReviewService: {ex.Message}");
 }
 
 // Configure the HTTP request pipeline.

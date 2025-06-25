@@ -9,4 +9,10 @@ namespace ReviewService.ReviewService.Infrastructure.Repositories;
 public class ReviewRepository(AppDbContext context)
     : BaseRepository<Review>(context), IReviewRepository
 {
+    public async Task<IEnumerable<Review>> ListByLoteIdAsync(Guid loteId)
+    {
+        return await Context.Set<Review>()
+            .Where(r => r.LoteId == loteId)
+            .ToListAsync();
+    }
 }

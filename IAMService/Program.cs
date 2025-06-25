@@ -103,22 +103,20 @@ using (var scope = app.Services.CreateScope())
 }
 
 // ====== RegistryService Registration ======
+// ====== RegistryService Registration ======
 try
 {
-    var appUrls = builder.Configuration["ASPNETCORE_URLS"] ?? "http://localhost:5161";
-    var port = new Uri(appUrls).Port;
-
     var serviceInfo = new
     {
         name = "iam-service",
-        url = $"http://localhost:{port}"
+        url = "http://iam-service:8080"
     };
 
     var json = JsonSerializer.Serialize(serviceInfo);
     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
     using var client = new HttpClient();
-    var response = await client.PostAsync("http://localhost:5002/registry/register", content);
+    var response = await client.PostAsync("http://registry-service:8080/registry/register", content);
 
     Console.WriteLine($"✅ Registro en RegistryService: {response.StatusCode}");
 }
@@ -126,6 +124,7 @@ catch (Exception ex)
 {
     Console.WriteLine($"❌ Error registrando IAMService: {ex.Message}");
 }
+
 
 if (app.Environment.IsDevelopment())
 {

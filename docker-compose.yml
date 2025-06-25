@@ -1,0 +1,118 @@
+version: '3.9'
+
+services:
+  config-service:
+    build:
+      context: .
+      dockerfile: ConfigService.API/Dockerfile
+    ports:
+      - "5062:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ./config-data:/app/config-data
+    restart: always
+
+  registry-service:
+    build:
+      context: .
+      dockerfile: RegistryService.API/Dockerfile
+    ports:
+      - "5002:8080"
+    depends_on:
+      - config-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    restart: always
+
+  admin-service:
+    build:
+      context: .
+      dockerfile: AdminService.API/Dockerfile
+    ports:
+      - "5026:8080"
+    depends_on:
+      - config-service
+      - registry-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    restart: always
+
+  gateway-service:
+    build:
+      context: .
+      dockerfile: GatewayService/Dockerfile
+    ports:
+      - "5217:8080"
+    depends_on:
+      - config-service
+      - registry-service
+      - admin-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    restart: always
+
+  iam-service:
+    build:
+      context: ./IAMService
+      dockerfile: Dockerfile
+    ports:
+      - "5161:8080"
+    depends_on:
+      - mysql
+      - config-service
+      - registry-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=server=mysql;port=3306;database=iamdb;user=root;password=1234;
+    restart: always
+
+  review-service:
+    build:
+      context: ./ReviewService
+      dockerfile: Dockerfile
+    ports:
+      - "5297:8080"
+    depends_on:
+      - mysql
+      - config-service
+      - registry-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=server=mysql;port=3306;database=reviewdb;user=root;password=1234;
+    restart: always
+
+  inventory-service:
+    build:
+      context: .
+      dockerfile: BURUBERI.InventoryService.API/Dockerfile
+    ports:
+      - "5055:8080"
+    depends_on:
+      - mysql
+      - config-service
+      - registry-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=server=mysql;port=3306;database=inventorydb;user=root;password=1234;
+    restart: always
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"     # Puerto para apps
+      - "15672:15672"   # Web UI
+
+volumes:
+  mysql_data:

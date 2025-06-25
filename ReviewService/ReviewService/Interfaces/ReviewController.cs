@@ -79,4 +79,27 @@ public class ReviewController(
             return StatusCode(500);
         }
     }
+    
+    [HttpGet("by-lote/{loteId}")]
+    [SwaggerOperation(
+        Summary = "Get reviews by Lote ID",
+        Description = "Returns all reviews associated with the specified Lote ID.",
+        OperationId = "GetReviewsByLoteId")]
+    [SwaggerResponse(StatusCodes.Status200OK,
+        "The reviews were found.", typeof(List<ReviewResource>))]
+    [SwaggerResponse(StatusCodes.Status404NotFound,
+        "No reviews found for the specified Lote ID.")]
+    public async Task<ActionResult> GetReviewsByLoteId(Guid loteId)
+    {
+        var query = new GetReviewsByLoteIdQuery(loteId);
+        var result = await reviewQueryService.Handle(query);
+
+        if (!result.Any()) return NotFound();
+
+        var resources = result
+            .Select(ReviewResourceFromEntityAssembler.ToResourceFromEntity)
+            .ToList();
+
+        return Ok(resources);
+    }
 }

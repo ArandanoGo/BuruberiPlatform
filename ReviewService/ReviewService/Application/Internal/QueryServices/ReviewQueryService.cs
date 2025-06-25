@@ -17,4 +17,9 @@ public class ReviewQueryService(IReviewRepository reviewRepository)
     {
         return await reviewRepository.FindByIdAsync(query.Id);
     }
+
+    public async Task<IEnumerable<Review>> Handle(GetReviewsByLoteIdQuery query)
+    {
+        return await reviewRepository.ListByLoteIdAsync(query.LoteId);
+    }
 }

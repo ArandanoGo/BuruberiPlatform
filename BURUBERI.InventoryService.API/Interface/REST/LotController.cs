@@ -2,6 +2,7 @@
 using BURUBERI.InventoryService.API.Domain.Services;
 using BURUBERI.InventoryService.API.Interface.REST.Resources;
 using BURUBERI.InventoryService.API.Interface.REST.Transform;
+using BURUBERI.InventoryService.API.Messaging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BURUBERI.InventoryService.API.Interface.REST;
@@ -42,15 +43,31 @@ namespace BURUBERI.InventoryService.API.Interface.REST;
             return Ok(resources);
         }
 
-        // GET /api/lotes/producer/{producerId}
         [HttpGet("producer/{producerId}")]
         public async Task<ActionResult<IEnumerable<LoteResource>>> GetByProducer(string producerId)
         {
             var query = new GetAllLoteByProducerIdQuery(producerId);
             var lots = await _queryService.GetLotesByProducerAsync(query);
-            var resources = lots.Select(LoteResourceFromEntityAssembler.ToResource);
+            var resources = lots.Select(LoteResourceFromEntityAssembler.ToResource).ToList();
+
+            if (resources.Any())
+            {
+                var loteId = resources.First().Id; // Escoge el primer lote de la lista
+
+                // Enviamos mensaje a RabbitMQ
+                using var publisher = new EventBusPublisher();
+                var message = new ReviewRequestMessage { LoteId = loteId };
+
+                publisher.Publish(
+                    MessageBusConstants.ExchangeName,
+                    MessageBusConstants.RoutingKeyGetReviewsByLote,
+                    message
+                );
+            }
+
             return Ok(resources);
         }
+
 
         // PUT /api/lotes/{id}
         [HttpPut("{id:guid}")]

@@ -9,7 +9,8 @@ public class ServiceMonitor
 
     public async Task<List<ServiceStatus>> CheckAllAsync()
     {
-        var registryUrl = "http://localhost:5002/registry/services"; // ← CAMBIA el puerto
+        // ✅ Usa el nombre del contenedor y el puerto interno
+        var registryUrl = "http://registry-service:8080/registry/services";
 
         var response = await _http.GetAsync(registryUrl);
         var services = await JsonSerializer.DeserializeAsync<List<ServiceStatus>>(

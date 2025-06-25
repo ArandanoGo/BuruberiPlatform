@@ -1,0 +1,5 @@
+{
+  "AppName": "Review Service",
+  "Port": 8080,
+  "ConnectionString": "Server=mysql;Database=reviewdb;"
+}

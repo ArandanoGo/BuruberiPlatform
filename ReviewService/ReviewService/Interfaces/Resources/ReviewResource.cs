@@ -1,3 +1,3 @@
 namespace ReviewService.ReviewService.Interfaces.Resources;
 
-public record ReviewResource(int Id, int LoteId, int Puntuacion, string Comentario);
+public record ReviewResource(int Id, Guid LoteId, int Puntuacion, string Comentario);

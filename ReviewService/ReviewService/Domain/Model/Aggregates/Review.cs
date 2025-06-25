@@ -4,7 +4,7 @@ public class Review
 {
     public int Id { get; }
     
-    public int LoteId { get; set; }
+    public Guid LoteId { get; set; }
     
     public int Puntuacion { get; set; }
     

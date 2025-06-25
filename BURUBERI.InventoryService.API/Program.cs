@@ -57,23 +57,20 @@ using (var scope = app.Services.CreateScope())
 }
 
 // ✅ Registro automático en RegistryService
+// ✅ Registro automático en RegistryService (versión compatible con Docker)
 try
 {
-    // Detectar puerto desde la configuración actual (ej. launchSettings.json)
-    var appUrls = builder.Configuration["ASPNETCORE_URLS"] ?? "http://localhost:5000";
-    var port = new Uri(appUrls).Port;
-
     var serviceInfo = new
     {
         name = "inventory-service",
-        url = $"http://localhost:{port}"
+        url = "http://inventory-service:8080"
     };
 
     var json = JsonSerializer.Serialize(serviceInfo);
     var content = new StringContent(json, Encoding.UTF8, "application/json");
 
     using var client = new HttpClient();
-    var response = await client.PostAsync("http://localhost:5002/registry/register", content);
+    var response = await client.PostAsync("http://registry-service:8080/registry/register", content);
 
     Console.WriteLine($"✅ Registro en RegistryService: {response.StatusCode}");
 }
@@ -81,5 +78,6 @@ catch (Exception ex)
 {
     Console.WriteLine($"❌ Error registrando InventoryService: {ex.Message}");
 }
+
 
 app.Run();

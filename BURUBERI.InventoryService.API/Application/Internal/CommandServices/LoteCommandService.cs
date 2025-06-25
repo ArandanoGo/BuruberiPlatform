@@ -5,6 +5,8 @@ using BURUBERI.InventoryService.API.Domain.Model.Commands;
 using BURUBERI.InventoryService.API.Domain.Repositories;
 using BURUBERI.InventoryService.API.Domain.Services;
 using BURUBERI.InventoryService.API.Interface.REST.Resources;
+using BURUBERI.InventoryService.API.Messaging;
+using BURUBERI.InventoryService.API.Messaging.Events;
 
 namespace BURUBERI.InventoryService.API.Application.Internal.CommandServices
 {
@@ -61,10 +63,9 @@ namespace BURUBERI.InventoryService.API.Application.Internal.CommandServices
             var lote = await _repository.GetByIdAsync(id);
             if (lote == null) throw new KeyNotFoundException("Lote no encontrado.");
 
-            // Mapear campos recibidos en el recurso
+            // Actualización del lote
             lote.Autor = resource.Autor;
             lote.Hora = resource.Hora;
-
             lote.MateriaOrganica = resource.MateriaOrganica;
             lote.CloruroPotasio = resource.CloruroPotasio;
             lote.Fosfato = resource.Fosfato;
@@ -72,7 +73,6 @@ namespace BURUBERI.InventoryService.API.Application.Internal.CommandServices
             lote.Urea = resource.Urea;
             lote.SulfatoMagnesio = resource.SulfatoMagnesio;
             lote.CorrectoresPH = resource.CorrectoresPH;
-
             lote.IdProductor = resource.IdProductor;
             lote.Tipo = resource.Tipo;
             lote.PesoKg = resource.PesoKg;
@@ -80,14 +80,29 @@ namespace BURUBERI.InventoryService.API.Application.Internal.CommandServices
             lote.Calidad = resource.Calidad;
             lote.Estado = resource.Estado;
             lote.Stock = resource.Stock;
-
             lote.FechaPedido = resource.FechaPedido;
             lote.ImagenUrl = resource.ImagenUrl;
-
             lote.FechaActualizacion = DateTime.UtcNow;
 
-            return await _repository.UpdateAsync(lote);
+            var updatedLote = await _repository.UpdateAsync(lote);
+
+// 👉 Publicar evento a RabbitMQ
+            var evento = new StockActualizadoEvent
+            {
+                LoteId = updatedLote.Id,
+                NuevoStock = updatedLote.Stock
+            };
+
+            var exchange = "review-requests-exchange";
+            var routingKey = "get-reviews-by-lote";
+
+            using var publisher = new EventBusPublisher();
+            publisher.Publish(exchange, routingKey, evento);
+
+
+            return updatedLote;
         }
+
 
         public async Task DeleteLoteAsync(Guid id)
         {

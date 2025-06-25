@@ -1,3 +1,3 @@
 namespace ReviewService.ReviewService.Domain.Model.Commands;
 
-public record CreateReviewCommand(int LoteId, int Puntuacion, string Comentario);
+public record CreateReviewCommand(Guid LoteId, int Puntuacion, string Comentario);
