@@ -114,5 +114,31 @@ services:
       - "5672:5672"     # Puerto para apps
       - "15672:15672"   # Web UI
 
+  order-service:
+    build:
+      context: ./BURUBERI.OrderService.API
+      dockerfile: Dockerfile
+    ports:
+      - "5288:8080"
+    depends_on:
+      - mysql
+      - config-service
+      - registry-service
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=server=mysql;port=3306;database=orderdb;user=root;password=1234;
+    restart: always
+    
+  favorites-service:
+    container_name: favorites-service
+    build:
+      context: ./BURUBERI.FavoritesService.API
+      dockerfile: Dockerfile
+    ports:
+      - "5056:5056"
+    depends_on:
+      - mysql
+      - rabbitmq
+
 volumes:
   mysql_data:

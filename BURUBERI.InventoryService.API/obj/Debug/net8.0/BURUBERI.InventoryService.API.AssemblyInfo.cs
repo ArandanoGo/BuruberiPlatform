@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BURUBERI.InventoryService.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+14291343db7f9cb5b3af45b7bb2c257a526aa88c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d74745bd02c53608d6dfa33936d0fde0e46933c")]
 [assembly: System.Reflection.AssemblyProductAttribute("BURUBERI.InventoryService.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BURUBERI.InventoryService.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

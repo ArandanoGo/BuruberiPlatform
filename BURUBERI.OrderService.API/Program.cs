@@ -1,3 +1,5 @@
+using System.Text;
+using System.Text.Json;
 using BURUBERI.OrderService.API;
 using BURUBERI.OrderService.API.Application.Internal.CommandServices;
 using BURUBERI.OrderService.API.Application.Internal.QueryServices;
@@ -50,5 +52,27 @@ using (var scope = app.Services.CreateScope())
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     context.Database.EnsureCreated();
 }
+
+try
+{
+    var serviceInfo = new
+    {
+        name = "order-service",
+        url = "http://order-service:8080"
+    };
+
+    var json = JsonSerializer.Serialize(serviceInfo);
+    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+    using var client = new HttpClient();
+    var response = await client.PostAsync("http://registry-service:8080/registry/register", content);
+
+    Console.WriteLine($"✅ Registro en RegistryService: {response.StatusCode}");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"❌ Error registrando OrderService: {ex.Message}");
+}
+
 
 app.Run();
