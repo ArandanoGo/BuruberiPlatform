@@ -18,7 +18,8 @@ namespace BURUBERI.OrderService.API.Interface.REST.Transform
                 idLote: resource.IdLote,
                 cantidad: resource.Cantidad,
                 estado: resource.Estado,
-                fechaPedido: resource.FechaPedido
+                fechaPedido: resource.FechaPedido,
+                idProductor: resource.IdProductor
             );
         }
     }

@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace BURUBERI.OrderService.API;
+namespace DefaultNamespace;
 
 [ApiController]
-[Route("order")]
+[Route("communication")]
 public class HealthController : ControllerBase
 {
     [HttpGet("status")]
     [HttpGet("/status")]
     public IActionResult Status()
     {
-        return Ok("Order Service is alive");
+        return Ok("Communication Service is alive");
     }
 }

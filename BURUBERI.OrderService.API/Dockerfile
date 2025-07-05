@@ -4,9 +4,12 @@ EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY BURUBERI.OrderService.API.csproj ./
-RUN dotnet restore "BURUBERI.OrderService.API.csproj"
-COPY . ./
+
+COPY BURUBERI.OrderService.API.csproj ./BURUBERI.OrderService.API.csproj
+RUN dotnet restore "./BURUBERI.OrderService.API.csproj"
+
+COPY . .
+
 RUN dotnet build "BURUBERI.OrderService.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

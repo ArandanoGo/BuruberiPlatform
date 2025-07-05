@@ -27,11 +27,10 @@ builder.Services.AddScoped<IFavoriteCommandService, FavoriteCommandService>();
 var app = builder.Build();
 
 // Swagger
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 app.MapControllers();
 

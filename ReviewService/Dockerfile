@@ -20,3 +20,5 @@ EXPOSE 5297
 
 # Comando de inicio
 ENTRYPOINT ["dotnet", "ReviewService.dll"]
+
+

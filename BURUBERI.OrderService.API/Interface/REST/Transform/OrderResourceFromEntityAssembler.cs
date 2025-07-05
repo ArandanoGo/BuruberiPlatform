@@ -20,7 +20,8 @@ namespace BURUBERI.OrderService.API.Interface.REST.Transform
                 IdLote = entity.IdLote,
                 Cantidad = entity.Cantidad,
                 Estado = entity.Estado,
-                FechaPedido = entity.FechaPedido
+                FechaPedido = entity.FechaPedido,
+                IdProductor = entity.IdProductor
             };
         }
     }

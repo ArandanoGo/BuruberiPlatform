@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using BURUBERI.CommunicationService.API.Domain.Model.Queries;
 using BURUBERI.CommunicationService.API.Domain.Services;
 using BURUBERI.CommunicationService.API.Interface.REST.Resources;

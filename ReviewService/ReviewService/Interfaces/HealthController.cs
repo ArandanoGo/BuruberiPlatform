@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace ReviewService.ReviewService.Interfaces;
 
 [ApiController]
-[Microsoft.AspNetCore.Components.Route("review")]
+[Route("review")]
 public class HealthController : ControllerBase
 {
-
+    [HttpGet("status")]
     [HttpGet("/status")]
     public IActionResult Status()
     {
-        return Ok("Review Service is alive");
+        return Ok("review Service is alive");
     }
 }

@@ -1,6 +1,15 @@
 version: '3.9'
 
 services:
+  
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    restart: always
+  
   config-service:
     build:
       context: .
@@ -106,14 +115,9 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     restart: always
-    
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    ports:
-      - "5672:5672"     # Puerto para apps
-      - "15672:15672"   # Web UI
-
+  
+  
+  
   order-service:
     build:
       context: ./BURUBERI.OrderService.API
@@ -124,21 +128,45 @@ services:
       - mysql
       - config-service
       - registry-service
+      - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=server=mysql;port=3306;database=orderdb;user=root;password=1234;
+      - RabbitMQ__Host=rabbitmq
     restart: always
-    
+  
+  
+  
   favorites-service:
     container_name: favorites-service
     build:
       context: ./BURUBERI.FavoritesService.API
       dockerfile: Dockerfile
     ports:
-      - "5056:5056"
+      - "5067:8080"
     depends_on:
       - mysql
       - rabbitmq
+  
+  
+  communication-service:
+    build:
+      context: ./BURUBERI.CommunicationService.API
+      dockerfile: Dockerfile
+    ports:
+      - "5015:8080"
+    depends_on:
+      - mysql
+      - config-service
+      - registry-service
+      - rabbitmq
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=server=mysql;port=3306;database=communicationdb;user=root;password=1234;
+    restart: always
+
 
 volumes:
   mysql_data:
+
+

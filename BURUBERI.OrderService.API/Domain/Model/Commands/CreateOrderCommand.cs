@@ -12,12 +12,16 @@ namespace BURUBERI.OrderService.API.Domain.Model.Commands
         public int Cantidad { get; }               // Cantidad solicitada
         public string Estado { get; }              // Estado de la orden (ej: "pendiente", "procesado")
         public DateTime FechaPedido { get; }       // Fecha del pedido
+   
+        
+        public int IdProductor { get; set; } // ID del productor asociado al lote
 
         public CreateOrderCommand(
             int idDistribuidor,
             string idLote,
             int cantidad,
             string estado,
+            int idProductor,
             DateTime fechaPedido
         )
         {
@@ -32,6 +36,7 @@ namespace BURUBERI.OrderService.API.Domain.Model.Commands
             Cantidad = cantidad;
             Estado = estado;
             FechaPedido = fechaPedido;
+            IdProductor = idProductor;
         }
     }
 }

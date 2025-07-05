@@ -7,6 +7,7 @@ using BURUBERI.OrderService.API.Domain.Model.Aggregates;
 using BURUBERI.OrderService.API.Domain.Repositories;
 using BURUBERI.OrderService.API.Domain.Services;
 using BURUBERI.OrderService.API.Infrastructure.Persistence.EFC.Repositories;
+using BURUBERI.OrderService.API.Messaging;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // ✅ Registra repositorio e infra
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddSingleton<EventBusPublisher>();
 
 // ✅ Registra servicios de aplicación
 builder.Services.AddScoped<IOrderCommandService, OrderCommandService>();

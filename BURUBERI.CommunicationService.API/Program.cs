@@ -1,3 +1,5 @@
+using System.Text;
+using System.Text.Json;
 using BURUBERI.CommunicationService.API;
 using BURUBERI.CommunicationService.API.Application.Internal.CommandServices;
 using BURUBERI.CommunicationService.API.Application.Internal.QueryServices;
@@ -5,6 +7,7 @@ using BURUBERI.CommunicationService.API.Domain.Model.Aggregates;
 using BURUBERI.CommunicationService.API.Domain.Repositories;
 using BURUBERI.CommunicationService.API.Domain.Services;
 using BURUBERI.CommunicationService.API.Infrastructure.Persistence.EFC.Repositories;
+using BURUBERI.CommunicationService.API.Messaging.Consumers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +28,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Repositorio
 builder.Services.AddScoped<IMensajeRepository, MensajeRepository>();
 builder.Services.AddScoped<IContactoRepository, ContactoRepository>();
+builder.Services.AddHostedService<OrderCreatedConsumer>();
 
 // Servicios de aplicación
 builder.Services.AddScoped<IMensajeCommandService, MensajeCommandService>();
@@ -53,6 +57,27 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     context.Database.EnsureCreated();
+}
+
+try
+{
+    var serviceInfo = new
+    {
+        name = "communication-service",
+        url = "http://communication-service:8080"
+    };
+
+    var json = JsonSerializer.Serialize(serviceInfo);
+    var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+    using var client = new HttpClient();
+    var response = await client.PostAsync("http://registry-service:8080/registry/register", content);
+
+    Console.WriteLine($"✅ Registro en RegistryService: {response.StatusCode}");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"❌ Error registrando CommunicationService: {ex.Message}");
 }
 
 app.Run();

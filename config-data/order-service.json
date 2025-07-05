@@ -1,0 +1,6 @@
+{
+  "AppName": "Order Service",
+  "Port": 5288,
+  "ConnectionString": "Server=mysql;Database=orderdb;"
+}
+  

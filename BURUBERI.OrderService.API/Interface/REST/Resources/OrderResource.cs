@@ -13,5 +13,6 @@ namespace BURUBERI.OrderService.API.Interface.REST.Resources
         public int Cantidad { get; set; }                 // Cantidad solicitada
         public string Estado { get; set; }                // Estado de la orden (ej: "pendiente", "completado")
         public DateTime FechaPedido { get; set; }         // Fecha del pedido (UTC)
+        public int IdProductor { get; set; }              // ID del productor asociado al lote
     }
 }

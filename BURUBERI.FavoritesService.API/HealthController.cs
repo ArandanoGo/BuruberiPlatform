@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace BURUBERI.OrderService.API;
+namespace BURUBERI.FavoritesService.API;
 
 [ApiController]
-[Route("order")]
+[Route("favorites")]
 public class HealthController : ControllerBase
 {
     [HttpGet("status")]
     [HttpGet("/status")]
     public IActionResult Status()
     {
-        return Ok("Order Service is alive");
+        return Ok("Favorites Service is alive");
     }
 }

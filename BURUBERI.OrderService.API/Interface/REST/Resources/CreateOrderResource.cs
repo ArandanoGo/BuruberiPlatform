@@ -12,5 +12,6 @@ namespace BURUBERI.OrderService.API.Interface.REST.Resources
         public int Cantidad { get; set; }
         public string Estado { get; set; }
         public DateTime FechaPedido { get; set; }
+        public int IdProductor { get; set; } 
     }
 }

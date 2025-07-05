@@ -9,6 +9,8 @@ namespace BURUBERI.OrderService.API.Domain.Model.Aggregates
         public string IdLote { get; set; }              // ID del lote solicitado
         public int Cantidad { get; set; }               // Cantidad solicitada (en kg, unidades, etc.)
         public string Estado { get; set; }              // Estado de la orden ("pendiente", "procesado", etc.)
+        
+        public int IdProductor { get; set; }         // ID del productor asociado al lote
         public DateTime FechaPedido { get; set; }       // Fecha del pedido (UTC)
 
         public DateTime FechaCreacion { get; set; } = DateTime.UtcNow;        // Fecha de creación en UTC

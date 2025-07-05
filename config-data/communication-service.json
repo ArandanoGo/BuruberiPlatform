@@ -1,0 +1,5 @@
+{
+  "AppName": "Inventory Service",
+  "Port": 5015,
+  "ConnectionString": "Server=mysql;Database=mensajedb;"
+}
