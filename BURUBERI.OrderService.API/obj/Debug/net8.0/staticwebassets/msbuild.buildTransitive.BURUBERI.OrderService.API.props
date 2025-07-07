@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\BURUBERI.OrderService.API.props" />
+</Project>

@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "f2hnWbwUye7lRQWa2ewHui5la1i1aqFTGjUS1T66QUs=",
+  "Source": "BURUBERI.CommunicationService.API",
+  "BasePath": "_content/BURUBERI.CommunicationService.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

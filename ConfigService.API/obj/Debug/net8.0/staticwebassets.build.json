@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "S0Q/uz1fXtL3KjwXsgUtpB913GFeOTLq2cWfGahqcGQ=",
+  "Source": "ConfigService.API",
+  "BasePath": "_content/ConfigService.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
